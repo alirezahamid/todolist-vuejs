@@ -24,6 +24,22 @@
           width="100"
         />
       </div>
+      <v-bottom-navigation
+        background-color="transparent"
+        class="elevation-0"
+        width="20%"
+      >
+        <v-btn
+          to="/"
+          value="tasks"
+        >
+          <span>My Tasks</span>
+        </v-btn>
+
+        <v-btn value="complate">
+          <span>Complate</span>
+        </v-btn>
+      </v-bottom-navigation>
 
       <v-spacer></v-spacer>
 
@@ -38,20 +54,15 @@
     </v-app-bar>
 
     <v-content>
-      <HelloWorld/>
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
 
 export default {
   name: 'App',
-
-  components: {
-    HelloWorld
-  },
 
   data: () => ({
     //
