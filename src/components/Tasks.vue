@@ -30,10 +30,12 @@
         </v-card>
         <v-card
           shaped
-          class="todoCard"
+          class="todoCard elevation-15"
+          v-for="(task,key) in tasks"
+          :key="key"
         >
-          <v-card-title>Todo</v-card-title>
-          <v-card-text>this is Todo</v-card-text>
+          <v-card-title>{{task.title}}</v-card-title>
+          <v-card-text>{{task.description}}</v-card-text>
           <v-cart-actions style="margin-left:.5em">
             <v-btn icon>
               <v-icon color="pink">mdi-pencil</v-icon>
@@ -52,13 +54,21 @@
 
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'tasks'
+  name: 'tasks',
+  computed: {
+    ...mapState(['tasks'])
+  },
+  created () {
+    this.$store.dispatch('fetchTasks')
+  }
+
 }
 </script>
 <style>
 .todoCard {
-  min-width: 30%;
+  width: 30%;
   flex-wrap: wrap;
   margin: 1em;
 }
