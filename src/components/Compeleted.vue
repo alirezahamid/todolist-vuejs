@@ -26,7 +26,6 @@
         >
           <v-card-title>{{task.title}}</v-card-title>
           <v-card-text>{{task.description}}</v-card-text>
-          <v-card-text>{{task._id}}</v-card-text>
           <v-card-actions style="margin-left:.5em">
             <v-btn
               @click="deleteTask(task._id)"

@@ -85,8 +85,18 @@
             <v-btn icon>
               <v-icon color="pink">mdi-pencil</v-icon>
             </v-btn>
-            <v-btn icon>
-              <v-icon color="green">mdi-checkbox-marked-circle</v-icon>
+            <v-btn
+              @click="doneTask(task._id)"
+              icon
+            >
+              <v-icon
+                v-if="task.done"
+                color="green"
+              >mdi-checkbox-marked-circle</v-icon>
+              <v-icon
+                v-else
+                color="grey"
+              >mdi-checkbox-marked-circle</v-icon>
             </v-btn>
 
           </v-card-actions>
@@ -105,6 +115,7 @@ export default {
   name: 'tasks',
   data: () => ({
     dialog: false,
+    isDone: false,
     singleTask: { title: '', description: '', done: false }
   }),
   computed: {
@@ -119,7 +130,16 @@ export default {
           this.$store.dispatch('fetchTasks')
         })
         .catch()
+    },
+    doneTask (id) {
+      const baseApi = 'http://127.0.0.1:3000'
+      Axios.put(baseApi + '/api/tasks/' + id, { done: true })
+        .then((res) => {
+          this.$store.dispatch('fetchTasks')
+        })
+        .catch()
     }
+
   },
   created () {
     this.$store.dispatch('fetchTasks')
