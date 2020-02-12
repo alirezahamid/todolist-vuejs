@@ -81,7 +81,7 @@
         >
           <v-card-title>{{task.title}}</v-card-title>
           <v-card-text>{{task.description}}</v-card-text>
-          <v-cart-actions style="margin-left:.5em">
+          <v-card-actions style="margin-left:.5em">
             <v-btn icon>
               <v-icon color="pink">mdi-pencil</v-icon>
             </v-btn>
@@ -89,7 +89,7 @@
               <v-icon color="green">mdi-checkbox-marked-circle</v-icon>
             </v-btn>
 
-          </v-cart-actions>
+          </v-card-actions>
 
         </v-card>
 

@@ -36,7 +36,10 @@
           <span>My Tasks</span>
         </v-btn>
 
-        <v-btn value="complate">
+        <v-btn
+          to="/compeleted"
+          value="complated"
+        >
           <span>Complate</span>
         </v-btn>
       </v-bottom-navigation>

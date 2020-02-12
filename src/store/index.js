@@ -7,19 +7,31 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    tasks: []
+    tasks: [],
+    doneTasks: []
 
   },
   mutations: {
-    pushTasks (state, tasks) {
+    fillTasks (state, tasks) {
       state.tasks = tasks
+    },
+    fillDoneTasks (state, doneTasks) {
+      state.doneTasks = doneTasks
     }
   },
   actions: {
     fetchTasks ({ commit }) {
       Axios.get(baseApi + '/api/tasks')
         .then(res => {
-          commit('pushTasks', res.data)
+          commit('fillTasks', res.data)
+        }).catch(error => {
+          throw new Error(`API ${error}`)
+        })
+    },
+    fetchDoneTasks ({ commit }) {
+      Axios.get(baseApi + '/api/compeleted')
+        .then(res => {
+          commit('fillDoneTasks', res.data)
         }).catch(error => {
           throw new Error(`API ${error}`)
         })
