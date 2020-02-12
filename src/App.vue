@@ -7,7 +7,7 @@
     >
       <div class="d-flex align-center">
         <v-icon x-large>mdi-book</v-icon>
-        <h1 class="ml-3">Todo List</h1>
+        <h1 class="ml-3 mr-3">Todo List</h1>
       </div>
       <v-bottom-navigation
         background-color="transparent"
