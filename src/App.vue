@@ -6,23 +6,8 @@
       dark
     >
       <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+        <v-icon x-large>mdi-book</v-icon>
+        <h1 class="ml-3">Todo List</h1>
       </div>
       <v-bottom-navigation
         background-color="transparent"
@@ -32,6 +17,7 @@
         <v-btn
           to="/"
           value="tasks"
+          class="subtitle-1"
         >
           <span>My Tasks</span>
         </v-btn>
@@ -39,6 +25,7 @@
         <v-btn
           to="/compeleted"
           value="complated"
+          class="subtitle-1"
         >
           <span>Complate</span>
         </v-btn>
@@ -47,12 +34,12 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        href="https://gitlab.com/alirezahamid/todolist-vuejs-1"
         target="_blank"
         text
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+        <span class="mr-2 subtitle-1 font-weight-bold">Gitlab</span>
+        <v-icon>mdi-git</v-icon>
       </v-btn>
     </v-app-bar>
 
