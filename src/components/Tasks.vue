@@ -89,7 +89,7 @@
               >mdi-pencil</v-icon>
             </v-btn>
             <v-btn
-              @click="doneTask(task)"
+              @click="doneTask(task._id)"
               icon
             >
               <v-icon
@@ -155,8 +155,8 @@
 
 </template>
 <script>
+import Api from '../services/api/api'
 import { mapState } from 'vuex'
-import Axios from 'axios'
 export default {
   name: 'tasks',
   data: () => ({
@@ -171,8 +171,7 @@ export default {
   },
   methods: {
     postTask () {
-      const baseApi = 'http://127.0.0.1:3000'
-      Axios.post(baseApi + '/api/tasks', this.newTask)
+      Api.addTask(this.newTask)
         .then((res) => {
           this.showAddTodo = false
           this.$store.dispatch('fetchTasks')
@@ -180,8 +179,7 @@ export default {
         .catch()
     },
     doneTask (id) {
-      const baseApi = 'http://127.0.0.1:3000'
-      Axios.put(baseApi + '/api/tasks/' + id, { done: true })
+      Api.doneSingleTask(id)
         .then((res) => {
           this.$store.dispatch('fetchTasks')
         })
@@ -192,8 +190,7 @@ export default {
       this.editTask = task
     },
     updateTask (id) {
-      const baseApi = 'http://127.0.0.1:3000'
-      Axios.put(baseApi + '/api/tasks/' + id, this.editTask)
+      Api.updateSingleTask(id, this.editTask)
         .then((res) => {
           this.showEditTodo = false
           this.$store.dispatch('fetchTasks')

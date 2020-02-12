@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Axios from 'axios'
+import { baseApi } from '@/services/api/base'
 
-const baseApi = 'http://127.0.0.1:3000'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -21,7 +20,7 @@ export default new Vuex.Store({
   },
   actions: {
     fetchTasks ({ commit }) {
-      Axios.get(baseApi + '/api/tasks')
+      baseApi.get('api/tasks')
         .then(res => {
           commit('fillTasks', res.data)
         }).catch(error => {
@@ -29,7 +28,7 @@ export default new Vuex.Store({
         })
     },
     fetchDoneTasks ({ commit }) {
-      Axios.get(baseApi + '/api/compeleted')
+      baseApi.get('api/compeleted')
         .then(res => {
           commit('fillDoneTasks', res.data)
         }).catch(error => {
