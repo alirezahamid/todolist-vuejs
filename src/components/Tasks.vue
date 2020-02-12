@@ -22,7 +22,7 @@
           shaped
           class="todoCard text-center grey lighten-4 elevation-0"
           id="addTodo"
-          @click.stop="dialog = true"
+          @click.stop="showAddTodo = true"
         >
           <v-card-text class="title">Add Todo</v-card-text>
           <v-card-text>
@@ -32,7 +32,7 @@
 
         <v-row justify="center">
           <v-dialog
-            v-model="dialog"
+            v-model="showAddTodo"
             max-width="290"
           >
             <v-card>
@@ -42,10 +42,10 @@
                 <v-text-field
                   required
                   label="Todo Title"
-                  v-model="singleTask.title"
+                  v-model="newTask.title"
                 ></v-text-field>
                 <v-textarea
-                  v-model="singleTask.description"
+                  v-model="newTask.description"
                   label="Todo Description"
                 ></v-textarea>
               </v-form>
@@ -56,7 +56,7 @@
                 <v-btn
                   color="red darken-1"
                   text
-                  @click="dialog =false"
+                  @click="showAddTodo =false"
                 >
                   Cancell
                 </v-btn>
@@ -83,10 +83,13 @@
           <v-card-text>{{task.description}}</v-card-text>
           <v-card-actions style="margin-left:.5em">
             <v-btn icon>
-              <v-icon color="pink">mdi-pencil</v-icon>
+              <v-icon
+                @click="showEdit(task)"
+                color="pink"
+              >mdi-pencil</v-icon>
             </v-btn>
             <v-btn
-              @click="doneTask(task._id)"
+              @click="doneTask(task)"
               icon
             >
               <v-icon
@@ -102,7 +105,50 @@
           </v-card-actions>
 
         </v-card>
+        <v-row justify-center>
+          <v-dialog
+            v-model="showEditTodo"
+            max-width="290"
+          >
+            <v-card>
+              <v-card-title class="headline">Edit todo</v-card-title>
 
+              <v-form class="ml-2 mr-2">
+                <v-text-field
+                  required
+                  label="Todo Title"
+                  :value="editTask.title"
+                  v-model="editTask.title"
+                ></v-text-field>
+                <v-textarea
+                  label="Todo Description"
+                  :value="editTask.description"
+                  v-model="editTask.description"
+                ></v-textarea>
+              </v-form>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn
+                  color="red darken-1"
+                  text
+                  @click="showEditTodo =false"
+                >
+                  Cancell
+                </v-btn>
+
+                <v-btn
+                  color="green darken-1"
+                  text
+                  @click="updateTask(editTask._id)"
+                >
+                  Edit
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-row>
       </v-flex>
     </v-layout>
   </v-container>
@@ -114,9 +160,11 @@ import Axios from 'axios'
 export default {
   name: 'tasks',
   data: () => ({
-    dialog: false,
+    showAddTodo: false,
+    showEditTodo: false,
     isDone: false,
-    singleTask: { title: '', description: '', done: false }
+    newTask: { title: '', description: '', done: false },
+    editTask: {}
   }),
   computed: {
     ...mapState(['tasks'])
@@ -124,9 +172,9 @@ export default {
   methods: {
     postTask () {
       const baseApi = 'http://127.0.0.1:3000'
-      Axios.post(baseApi + '/api/tasks', this.singleTask)
+      Axios.post(baseApi + '/api/tasks', this.newTask)
         .then((res) => {
-          this.dialog = false
+          this.showAddTodo = false
           this.$store.dispatch('fetchTasks')
         })
         .catch()
@@ -135,6 +183,19 @@ export default {
       const baseApi = 'http://127.0.0.1:3000'
       Axios.put(baseApi + '/api/tasks/' + id, { done: true })
         .then((res) => {
+          this.$store.dispatch('fetchTasks')
+        })
+        .catch()
+    },
+    showEdit (task) {
+      this.showEditTodo = true
+      this.editTask = task
+    },
+    updateTask (id) {
+      const baseApi = 'http://127.0.0.1:3000'
+      Axios.put(baseApi + '/api/tasks/' + id, this.editTask)
+        .then((res) => {
+          this.showEditTodo = false
           this.$store.dispatch('fetchTasks')
         })
         .catch()
