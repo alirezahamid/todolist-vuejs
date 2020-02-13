@@ -6,11 +6,6 @@
     >
       <v-toolbar-title>My Compeleted Tasks</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <v-layout justify-center>
