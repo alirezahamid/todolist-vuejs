@@ -4,7 +4,7 @@
     <v-btn
       text
       large
-      color="primary"
+      color="amber accent-4"
       @click.stop="showAddTodo = true"
     >
       <v-icon>mdi-plus</v-icon>

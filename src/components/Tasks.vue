@@ -15,14 +15,13 @@
 
     <v-layout justify-center>
       <v-flex
-        justify-center
-        align-center
         row
+        calss="todocards"
       >
 
         <v-card
-          shaped
-          class="todoCard elevation-15"
+          raised
+          class="todoCard elevation-15 yellow lighten-2"
           v-for="(task,key) in tasks"
           :key="key"
         >
@@ -145,9 +144,14 @@ export default {
 }
 </script>
 <style>
-.todoCard {
-  width: 30%;
+.todocards {
   flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+  align-items: center;
+}
+.todoCard {
+  flex: 0 0 200px;
   margin: 1em;
 }
 </style>
