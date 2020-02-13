@@ -46,6 +46,18 @@
     <v-content>
       <router-view></router-view>
     </v-content>
+    <v-footer
+      app
+      dark
+      class="font-weight-medium amber accent-4"
+    >
+      <v-col
+        class="text-center"
+        cols="12"
+      >
+        &copy; {{ new Date().getFullYear() }} — <strong>Alireza Hamid</strong>
+      </v-col>
+    </v-footer>
   </v-app>
 </template>
 
