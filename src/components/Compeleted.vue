@@ -21,7 +21,7 @@
         <v-card
           raised
           class="todoCard elevation-15 yellow lighten-2"
-          v-for="(task,key) in doneTasks"
+          v-for="(task,key) in doneTasks.slice().reverse()"
           :key="key"
         >
           <v-card-title>{{task.title}}</v-card-title>
