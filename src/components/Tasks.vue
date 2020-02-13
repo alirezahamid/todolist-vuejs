@@ -4,8 +4,8 @@
       color="transparent"
       flat
     >
-      <v-toolbar-title>My Tasks</v-toolbar-title>
-
+      <v-toolbar-title class="mr-10">My Tasks</v-toolbar-title>
+      <AddTask />
       <v-spacer></v-spacer>
 
       <v-btn icon>
@@ -16,62 +16,9 @@
     <v-layout justify-center>
       <v-flex
         justify-center
+        align-center
         row
       >
-        <v-card
-          shaped
-          class="todoCard text-center grey lighten-4 elevation-0"
-          id="addTodo"
-          @click.stop="showAddTodo = true"
-        >
-          <v-card-text class="title">Add Todo</v-card-text>
-          <v-card-text>
-            <v-icon large>mdi-plus</v-icon>
-          </v-card-text>
-        </v-card>
-
-        <v-row justify="center">
-          <v-dialog
-            v-model="showAddTodo"
-            max-width="290"
-          >
-            <v-card>
-              <v-card-title class="headline">Add new todo</v-card-title>
-
-              <v-form class="ml-2 mr-2">
-                <v-text-field
-                  required
-                  label="Todo Title"
-                  v-model="newTask.title"
-                ></v-text-field>
-                <v-textarea
-                  v-model="newTask.description"
-                  label="Todo Description"
-                ></v-textarea>
-              </v-form>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-
-                <v-btn
-                  color="red darken-1"
-                  text
-                  @click="showAddTodo =false"
-                >
-                  Cancell
-                </v-btn>
-
-                <v-btn
-                  color="green darken-1"
-                  text
-                  @click="postTask"
-                >
-                  Save
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-row>
 
         <v-card
           shaped
@@ -157,27 +104,19 @@
 <script>
 import Api from '../services/api/api'
 import { mapState } from 'vuex'
+import AddTask from './AddTask'
 export default {
   name: 'tasks',
+  components: { AddTask },
   data: () => ({
-    showAddTodo: false,
     showEditTodo: false,
     isDone: false,
-    newTask: { title: '', description: '', done: false },
     editTask: {}
   }),
   computed: {
     ...mapState(['tasks'])
   },
   methods: {
-    postTask () {
-      Api.addTask(this.newTask)
-        .then((res) => {
-          this.showAddTodo = false
-          this.$store.dispatch('fetchTasks')
-        })
-        .catch()
-    },
     doneTask (id) {
       Api.doneSingleTask(id)
         .then((res) => {
