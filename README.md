@@ -6,7 +6,7 @@
 ## Project setup
 ### 4 Steps To Run Endpoint
 
-:fork_and_knife: 1- you need clone this repository [NodeJs-CURD](https://duckduckgo.com). <br><br>
+:fork_and_knife: 1- you need clone this repository [NodeJs-CURD](https://gitlab.com/alirezahamid/nodejs-curd). <br><br>
 
 
 :rocket: 2- go to **NodeJs-CURD** project path and run this command :
